@@ -4,18 +4,24 @@ const config = require("./config.json");
 
 client.on("ready", () => {
   console.log("deathmachine.exe booting up, codename: " + client.user.tag);
-  client.user.setActivity({status: "Online", "animu": {type: "WATCHING"} })
+  client.user.setPresence({'animu': {type: "WATCHING"} })
 });
 
 //client.user.setGame({status: "online", "Anime": { type: "WATCHING" } });
   /*types include: watching, streaming, playing, listening*/
  
-client.on('message', () => {
-  if (message.content == 'ping') {
+/*Example of using a keyword to return bot reply*/
+client.on('message', message => {
+  if (message.content == "ping") {
     message.channel.send('pong');
   }
 });
 
+client.on('message', message => {
+  if (message.content == "avatar check") {
+    message.reply(message.author.avatarURL);
+  }
+});
  
   //   client.guilds.forEach(guild => {
   //     console.log(" - " + guild.name);
@@ -26,7 +32,6 @@ client.on('message', () => {
   //     });
   //   });
 
-<<<<<<< HEAD
 client.on("message", receivedMessage => {
   if (receivedMessage.author == client.user) {
     return;
@@ -39,6 +44,3 @@ client.on("message", receivedMessage => {
 });
 
 client.login(config.token);
-=======
-  client.login(config.token);
->>>>>>> messed around with status
