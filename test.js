@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const config = require("./config.json");
 
 client.on("ready", () => {
   // List servers the bot is connected to
@@ -14,4 +15,4 @@ client.on("ready", () => {
 //   });
 });
 
-client.login("NjA5MTUyMDg3Njk1Mjk0NTI3.XUzDAg.UCtOz5olgtoS9qvXE6kuJjQP_4M"); /* Replace XXXXX with your bot token*/
+client.login(config.token); /* Replace XXXXX with your bot token*/
