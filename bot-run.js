@@ -3,11 +3,20 @@ const client = new Discord.Client();
 const config = require("./config.json");
 
 client.on("ready", () => {
-  /* List servers the bot is connected to*/
-  console.log("She that shall not be named: " + client.user.tag);
-  client.user.setActivity("Anime", { type: "WATCHING" });
-  /*types include: watching, streaming, playing, listening*/
+  console.log("deathmachine.exe booting up, codename: " + client.user.tag);
+  client.user.setActivity({status: "Online", "animu": {type: "WATCHING"} })
+});
 
+//client.user.setGame({status: "online", "Anime": { type: "WATCHING" } });
+  /*types include: watching, streaming, playing, listening*/
+ 
+client.on('message', () => {
+  if (message.content == 'ping') {
+    message.channel.send('pong');
+  }
+});
+
+ 
   //   client.guilds.forEach(guild => {
   //     console.log(" - " + guild.name);
 
@@ -16,8 +25,8 @@ client.on("ready", () => {
   //       console.log(` -- ${channel.name} (${channel.type}) - ${channel.id}`);
   //     });
   //   });
-});
 
+<<<<<<< HEAD
 client.on("message", receivedMessage => {
   if (receivedMessage.author == client.user) {
     return;
@@ -30,3 +39,6 @@ client.on("message", receivedMessage => {
 });
 
 client.login(config.token);
+=======
+  client.login(config.token);
+>>>>>>> messed around with status
