@@ -2,11 +2,28 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
 
+/*
 client.on("ready",() =>
 {
   console.log("deathmachine.exe booting up, codename: " + client.user.tag);
-  client.user.setPresence({ animu: { type: "WATCHING" } });
+  client.user.setPresence({ "anime": { type: "WATCHING" } });
+});*/
+// Code stopped working 
+
+client.on('ready',() =>
+{
+  console.log("deathmachine.exe booting up, codename: " + client.user.tag);
+  client.user.setStatus('idle')
+  // Types of Status: available, idle, dnd, invisible
+  client.user.setPresence({
+    game: {
+      name: 'Animu',
+      type: "WATCHING",
+      //url: "https://www.twitch.tv/" // For Streaming Only
+    }
+  });
 });
+
 
 //client.user.setGame({status: "online", "Anime": { type: "WATCHING" } });
 /*types include: watching, streaming, playing, listening*/
