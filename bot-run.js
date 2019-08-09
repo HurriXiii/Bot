@@ -3,9 +3,11 @@ const client = new Discord.Client();
 const config = require("./config.json");
 
 client.on("ready", () => {
-  // List servers the bot is connected to
-  console.log("Connected as " + client.user.tag);
+  /* List servers the bot is connected to*/
+  console.log("She that shall not be named: " + client.user.tag);
   client.user.setActivity("Anime", { type: "WATCHING" });
+  /*types include: watching, streaming, playing, listening*/
+
   //   client.guilds.forEach(guild => {
   //     console.log(" - " + guild.name);
 
@@ -16,4 +18,4 @@ client.on("ready", () => {
   //   });
 });
 
-client.login(config.token); /* Replace XXXXX with your bot token*/
+client.login(config.token);
