@@ -18,4 +18,15 @@ client.on("ready", () => {
   //   });
 });
 
+client.on("message", receivedMessage => {
+  if (receivedMessage.author == client.user) {
+    return;
+  }
+  /*
+  receivedMessage.channel.send(
+    "Message received, " + receivedMessage.toString()
+  );*/
+  receivedMessage.reply("OwO");
+});
+
 client.login(config.token);
