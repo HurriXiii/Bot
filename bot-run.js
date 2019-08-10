@@ -28,67 +28,95 @@ bot.on('ready',() =>
 
 bot.on("message",message =>
 {
-  if(!message.content.startsWith(config.prefix) || message.author.bot) return;
+  let args = message.content.substring(config.prefix.length).split(" ");
 
-  if(message.content.startsWith(config.prefix + "ping"))
+  switch(args[0])
   {
-    const embed = new RichEmbed().setColor("FF8CE8").setTitle("Pong!");
+    case 'ping':
+      const embedPing = new RichEmbed().setColor("FF8CE8").setTitle("Pong!");
+      message.channel.send(embedPing);
+      break;
+    case "avatar":
+      message.reply();
+      const embedAvatar = new RichEmbed()
+        .setTitle("Here is your avatar!")
+        .setURL(message.author.avatarURL)
+        .setColor("FF8CE8")
+        .setImage(message.author.avatarURL);
+      message.channel.send(embedAvatar);
+      break;
+    case "help":
+      const embedHelp = new RichEmbed()
+        .setTitle("Here is a list of commands!")
+        .setColor("FF8CE8")
+        .setDescription("!ping\n" + "!avatar\n" + "!shutdown");
 
-    message.channel.send(embed);
-    //message.channel.send("pong!");
+      message.channel.send(embedHelp);
+      break;
+    case "shutdown":
+      const embedShutdown = new RichEmbed()
+        .setTitle("Shutting Down...")
+        .setColor("0xff0000")
+      //.setDescription("Shutting Down...");
 
-  } else if(message.content.startsWith(config.prefix + "avatar"))
-  {
-    const embed = new RichEmbed()
-      .setTitle("Here is your avatar!")
-      .setURL(message.author.avatarURL)
-      .setColor("FF8CE8")
-      .setImage(message.author.avatarURL);
-    message.channel.send(embed);
-    //message.reply(message.author.avatarURL);
+      message.channel.send(embedShutdown).then(() => bot.destroy());
+      break;
+    /*
+  case "info":
+    if(args[1] === "version")
+    {
+      message.channel.send("version" + version);
+    } else
+    {
+      message.channel.send("Invalid Args")
+    }
+    break;
+    */
+    /// warning this shutdownsecret only works if you have the config setup properly
+    case "shutdownsecret":
+      if(args[1] === config.shutdown_code)
+      {
+        const embedShutdownSecret = new RichEmbed()
+          .setTitle("Shutting Down...")
+          .setColor("0xff0000")
+        //.setDescription("Shutting Down...");
+        message.channel.send(embedShutdownSecret).then(() => bot.destroy());
+      } else
+      {
+        message.channel.send("Invalid Args")
+      }
+      break;
 
-  } else if(message.content.startsWith(config.prefix + "help"))
-  {
-    const embed = new RichEmbed()
-      .setTitle("Here is a list of commands!")
-      .setColor("FF8CE8")
-      .setDescription("!ping\n" + "!avatar\n" + "!embed\n" + "!shutdown");
-
-    message.channel.send(embed);
-    //message.reply(message.author.avatarURL);
+    case "rolecheck":
+      if(!message.member.roles.find(r => r.name === "Coderz")) return message.channel.send("You do not have the right role")
+      message.reply("You are the correct role")
+      break;
+    /* CANT FIGURE OUT IDS OMG
+        case "turnoff":
+          if(message.author.id != "234234234" || "234234234234") return message.channel.send("You're the bot owner!")
+          message.reply("You an owner")
+          break;
+    */
+    /*
+              if(args[1] === config.shutdown_code)
+              {
+                const embedShutdownSecret = new RichEmbed()
+                  .setTitle("Command Received")
+                  .setColor("0xff0000")
+                  .setDescription("Shutting Down...");
+                message.channel.send(embedShutdownSecret).then(() => bot.destroy());
+              } else
+              {
+                message.channel.send("Invalid Args")
+              }
+              break;
+    */
+    case "clear":
+      if(!args[1]) return message.reply("Please define the amount of messages you want to clear")
+      message.channel.bulkDelete(args[1]);
+      break;
   }
-});
-
-//const { bot, RichEmbed } = require("discord.js");
-// This is a backup of the line above
-bot.on("message",message =>
-{
-  if(message.content.startsWith(config.prefix + "embed"))
-  {
-    // We can create embeds using the MessageEmbed constructor
-    // Read more about all that you can do with the constructor
-    // over at https://discord.js.org/#/docs/main/stable/class/RichEmbed
-    const embed = new RichEmbed()
-      .setTitle("A slick little embed")
-      .setColor("FF8CE8")
-      .setDescription("Hello, this is a slick embed!");
-
-    message.channel.send(embed);
-  }
-});
-
-bot.on("message",message =>
-{
-  if(message.content.startsWith(config.prefix + "shutdown"))
-  {
-    const embed = new RichEmbed()
-      .setTitle("Command Received")
-      .setColor("0xff0000")
-      .setDescription("Shutting Down...");
-
-    message.channel.send(embed).then(() => bot.destroy());
-  }
-});
+})
 
 // THIS WILL MESSAGE A USER EVERY TIME A MESSAGED IS TYPED
 /*
