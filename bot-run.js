@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const bot = new Discord.Client();
 const config = require("./config.json");
+const { RichEmbed } = require("discord.js");
 
 /*
 bot.on("ready",() =>
@@ -13,20 +14,17 @@ bot.on("ready",() =>
 bot.on('ready',() =>
 {
   console.log("deathmachine.exe booting up, codename: " + bot.user.tag);
-  bot.user.setStatus('idle')
+  bot.user.setStatus('available')
   // Types of Status: available, idle, dnd, invisible
   bot.user.setPresence({
     game: {
       name: 'Animu',
       type: "WATCHING",
+      /*types include: watching, streaming, playing, listening*/
       //url: "https://www.twitch.tv/" // For Streaming Only
     }
   });
 });
-
-
-//bot.user.setGame({status: "online", "Anime": { type: "WATCHING" } });
-/*types include: watching, streaming, playing, listening*/
 
 bot.on("message",message =>
 {
@@ -38,7 +36,7 @@ bot.on("message",message =>
 
     message.channel.send(embed);
     //message.channel.send("pong!");
-    
+
   } else if(message.content.startsWith(config.prefix + "avatar"))
   {
     const embed = new RichEmbed()
@@ -61,9 +59,6 @@ bot.on("message",message =>
   }
 });
 
-/// THIS IS TO SHUT DOWN THE BOT
-
-const { RichEmbed } = require("discord.js");
 //const { bot, RichEmbed } = require("discord.js");
 // This is a backup of the line above
 bot.on("message",message =>
@@ -91,7 +86,7 @@ bot.on("message",message =>
       .setColor("0xff0000")
       .setDescription("Shutting Down...");
 
-    message.channel.send(embed).then(msg => bot.destroy());
+    message.channel.send(embed).then(() => bot.destroy());
   }
 });
 
