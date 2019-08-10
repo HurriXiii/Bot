@@ -1,21 +1,21 @@
 const Discord = require("discord.js");
-const client = new Discord.Client();
+const bot = new Discord.Client();
 const config = require("./config.json");
 
 /*
-client.on("ready",() =>
+bot.on("ready",() =>
 {
-  console.log("deathmachine.exe booting up, codename: " + client.user.tag);
-  client.user.setPresence({ "anime": { type: "WATCHING" } });
+  console.log("deathmachine.exe booting up, codename: " + bot.user.tag);
+  bot.user.setPresence({ "anime": { type: "WATCHING" } });
 });*/
 // Code stopped working 
 
-client.on('ready',() =>
+bot.on('ready',() =>
 {
-  console.log("deathmachine.exe booting up, codename: " + client.user.tag);
-  client.user.setStatus('idle')
+  console.log("deathmachine.exe booting up, codename: " + bot.user.tag);
+  bot.user.setStatus('idle')
   // Types of Status: available, idle, dnd, invisible
-  client.user.setPresence({
+  bot.user.setPresence({
     game: {
       name: 'Animu',
       type: "WATCHING",
@@ -25,10 +25,10 @@ client.on('ready',() =>
 });
 
 
-//client.user.setGame({status: "online", "Anime": { type: "WATCHING" } });
+//bot.user.setGame({status: "online", "Anime": { type: "WATCHING" } });
 /*types include: watching, streaming, playing, listening*/
 
-client.on("message",message =>
+bot.on("message",message =>
 {
   if(!message.content.startsWith(config.prefix) || message.author.bot) return;
 
@@ -38,6 +38,7 @@ client.on("message",message =>
 
     message.channel.send(embed);
     //message.channel.send("pong!");
+    
   } else if(message.content.startsWith(config.prefix + "avatar"))
   {
     const embed = new RichEmbed()
@@ -47,6 +48,7 @@ client.on("message",message =>
       .setImage(message.author.avatarURL);
     message.channel.send(embed);
     //message.reply(message.author.avatarURL);
+
   } else if(message.content.startsWith(config.prefix + "help"))
   {
     const embed = new RichEmbed()
@@ -62,9 +64,9 @@ client.on("message",message =>
 /// THIS IS TO SHUT DOWN THE BOT
 
 const { RichEmbed } = require("discord.js");
-//const { Client, RichEmbed } = require("discord.js");
+//const { bot, RichEmbed } = require("discord.js");
 // This is a backup of the line above
-client.on("message",message =>
+bot.on("message",message =>
 {
   if(message.content.startsWith(config.prefix + "embed"))
   {
@@ -80,7 +82,7 @@ client.on("message",message =>
   }
 });
 
-client.on("message",message =>
+bot.on("message",message =>
 {
   if(message.content.startsWith(config.prefix + "shutdown"))
   {
@@ -89,14 +91,14 @@ client.on("message",message =>
       .setColor("0xff0000")
       .setDescription("Shutting Down...");
 
-    message.channel.send(embed).then(msg => client.destroy());
+    message.channel.send(embed).then(msg => bot.destroy());
   }
 });
 
 // THIS WILL MESSAGE A USER EVERY TIME A MESSAGED IS TYPED
 /*
-client.on("message", receivedMessage => {
-  if (receivedMessage.author == client.user) {
+bot.on("message", receivedMessage => {
+  if (receivedMessage.author == bot.user) {
     return;
   }
 
@@ -107,4 +109,4 @@ client.on("message", receivedMessage => {
 });
 */
 
-client.login(config.token);
+bot.login(config.token);
