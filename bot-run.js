@@ -2,29 +2,20 @@ const Discord = require("discord.js");
 const bot = new Discord.Client();
 const config = require("./config.json");
 const { RichEmbed } = require("discord.js");
+const fs = require("fs");
 
-/*
-bot.on("ready",() =>
+fs.readdir("./events/",(err,files) =>
 {
-  console.log("deathmachine.exe booting up, codename: " + bot.user.tag);
-  bot.user.setPresence({ "anime": { type: "WATCHING" } });
-});*/
-// Code stopped working 
-
-bot.on('ready',() =>
-{
-  console.log("deathmachine.exe booting up, codename: " + bot.user.tag);
-  bot.user.setStatus('available')
-  // Types of Status: available, idle, dnd, invisible
-  bot.user.setPresence({
-    game: {
-      name: 'Animu',
-      type: "WATCHING",
-      /*types include: watching, streaming, playing, listening*/
-      //url: "https://www.twitch.tv/" // For Streaming Only
-    }
+  files.forEach(file =>
+  {
+    const eventHandler = require(`./events/${file}`);
+    const eventName = file.split(".")[0];
+    bot.on(eventName,(...args) => eventHandler(bot,...args));
   });
 });
+
+
+
 
 bot.on("message",message =>
 {
@@ -32,27 +23,6 @@ bot.on("message",message =>
 
   switch(args[0])
   {
-    case 'ping':
-      const embedPing = new RichEmbed().setColor("FF8CE8").setTitle("Pong!");
-      message.channel.send(embedPing);
-      break;
-    case "avatar":
-      message.reply();
-      const embedAvatar = new RichEmbed()
-        .setTitle("Here is your avatar!")
-        .setURL(message.author.avatarURL)
-        .setColor("FF8CE8")
-        .setImage(message.author.avatarURL);
-      message.channel.send(embedAvatar);
-      break;
-    case "help":
-      const embedHelp = new RichEmbed()
-        .setTitle("Here is a list of commands!")
-        .setColor("FF8CE8")
-        .setDescription("!ping\n" + "!avatar\n" + "!shutdown");
-
-      message.channel.send(embedHelp);
-      break;
     case "shutdown":
       const embedShutdown = new RichEmbed()
         .setTitle("Shutting Down...")
@@ -118,16 +88,27 @@ bot.on("message",message =>
   }
 })
 
-// THIS WILL MESSAGE A USER EVERY TIME A MESSAGED IS TYPED
 /*
+// THIS WILL MESSAGE A USER EVERY TIME A MESSAGED IS TYPED
 bot.on("message", receivedMessage => {
-  if (receivedMessage.author == bot.user) {
+if (receivedMessage.author == bot.user) {
+ return;
+}
+
+receivedMessage.channel.send(
+ "Message received, " + receivedMessage.toString()
+);
+receivedMessage.reply("OwO");
+});
+
+bot.on("message",receivedMessage =>
+{
+  if(receivedMessage.author == bot.user)
+  {
     return;
   }
 
-  receivedMessage.channel.send(
-    "Message received, " + receivedMessage.toString()
-  );
+  //receivedMessage.channel.send(receivedMessage.toString());
   receivedMessage.reply("OwO");
 });
 */
