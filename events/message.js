@@ -7,7 +7,9 @@ const ping = require("../commands/ping.js");
 const role_check = require("../commands/role_check.js");
 const shutdown_code = require("../commands/shutdown_code.js");
 const shutdown = require("../commands/shutdown.js");
+const todo = require("../commands/todo.js");
 const config = require("../config.json");
+
 
 module.exports = (bot,message) =>
 {
@@ -46,5 +48,9 @@ module.exports = (bot,message) =>
     else if(message.content.startsWith(config.prefix + "shutdown"))
     {
         return shutdown(message);
+    }
+    else if(message.content.startsWith(config.prefix + "todo"))
+    {
+        return todo(message);
     }
 };
