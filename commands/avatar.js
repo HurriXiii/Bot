@@ -9,3 +9,4 @@ module.exports = message =>
         .setImage(message.author.avatarURL);
     message.channel.send(embedAvatar);
 };
+// Test
