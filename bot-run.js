@@ -14,8 +14,52 @@ fs.readdir("./events/",(err,files) =>
   });
 });
 
+bot.on("message", async message => {
+  if(message.author.bot) return;
+  if(message.channel.type === "dm") return;
 
+  let prefix = config.prefix;
+  let messageArray = message.content.split(" ");
+  let cmd = messageArray[0];
+  let args = messageArray.slice(1);
 
+  if (cmd === `${prefix}serverinfo`){
+    let sicon = message.guild.displayAvatarURL;
+    let embedServer = new Discord.RichEmbed()
+      .setTitle("-Server Information-")
+      .setColor("FF8CE8")
+      .setThumbnail(sicon)
+      .addField("Server Name", message.guild.name)
+      .addField("Created On", message.guild.createdAt)
+      .addField("You Joined", message.member.joinedAt)
+      .addField("Total Memebers", message.guild.memberCount)
+    return message.channel.send(embedServer);
+  }
+
+  if (cmd === `${prefix}userinfo`){
+
+    let embedUser = new Discord.RichEmbed()
+      .setAuthor(message.author.username)
+      .setDescription("This is the user's info!")
+      .setColor("FF8CE8")
+      .addField("Full Username", `${message.author.username}#${message.author.discriminator}`)
+      .addField("ID", message.author.id)
+      .addField("Created At", message.author.createdAt)
+    return message.channel.send(embedUser);
+  }
+
+  if (cmd === `${prefix}botinfo`){
+
+      let bicon = bot.user.displayAvatarURL;
+      let embedBotInfo = new Discord.RichEmbed()
+          .setTitle("-Bot Information-")
+          .setColor("FF8CE8")
+          .setThumbnail(bicon)
+          .addField("Bot Name", bot.user.username)
+          .addField("Created On", bot.user.createdAt);
+      return message.channel.send(embedBotInfo);
+    }
+  });
 
 bot.on("message",message =>
 {

@@ -1,6 +1,8 @@
 const avatar = require("../commands/avatar.js");
 const ban = require("../commands/ban.js");
+const birthday = require("../commands/birthday.js");
 const help = require("../commands/help.js");
+const incorrect = require("../commands/incorrect.js")
 const kick = require("../commands/kick.js");
 const msg_purge = require("../commands/msg_purge.js");
 const ping = require("../commands/ping.js");
@@ -13,13 +15,19 @@ const config = require("../config.json");
 
 module.exports = (bot,message) =>
 {
-    if(message.content.startsWith(config.prefix + "avatar"))
+    if(message.author.bot) return;
+
+    else if(message.content.startsWith(config.prefix + "avatar"))
     {
         return avatar(message);
     }
     else if(message.content.startsWith(config.prefix + "ban"))
     {
         return ban(message);
+    }
+    else if(message.content.startsWith(config.prefix + "birthday"))
+    {
+        return birthday(message);
     }
     else if(message.content.startsWith(config.prefix + "help"))
     {
@@ -52,5 +60,9 @@ module.exports = (bot,message) =>
     else if(message.content.startsWith(config.prefix + "todo"))
     {
         return todo(message);
+    }
+    else if(message.content.startsWith(config.prefix))
+    {
+        return incorrect(message);
     }
 };
