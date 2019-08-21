@@ -1,6 +1,8 @@
-const config = require("../config.json");
+const { RichEmbed } = require("discord.js");
 
-module.exports = message =>
-{
-    console.log("shutdown is not setup yet");
+module.exports = message => {
+    const embedShutDown = new RichEmbed()
+      .setTitle("Shutting Down... :(")
+      .setColor("0xff0000")
+    message.channel.send(embedShutDown);
 };

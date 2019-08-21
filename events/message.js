@@ -4,6 +4,7 @@ const help = require("../commands/help.js");
 const kick = require("../commands/kick.js");
 const msg_purge = require("../commands/msg_purge.js");
 const ping = require("../commands/ping.js");
+const reset = require("../commands/reset.js");
 const role_check = require("../commands/role_check.js");
 const shutdown_code = require("../commands/shutdown_code.js");
 const shutdown = require("../commands/shutdown.js");
@@ -36,6 +37,10 @@ module.exports = (bot,message) =>
     else if(message.content.startsWith(config.prefix + "ping"))
     {
         return ping(message);
+    }
+    else if(message.content.startsWith(config.prefix + "reset"))
+    {
+        return reset(message); 
     }
     else if(message.content.startsWith(config.prefix + "role_check"))
     {

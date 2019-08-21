@@ -3,6 +3,7 @@ const bot = new Discord.Client();
 const config = require("./config.json");
 const { RichEmbed } = require("discord.js");
 const fs = require("fs");
+const ownerID = config.ownerID;
 
 fs.readdir("./events/",(err,files) =>
 {
@@ -23,14 +24,14 @@ bot.on("message",message =>
 
   switch(args[0])
   {
-    case "shutdown":
-      const embedShutdown = new RichEmbed()
-        .setTitle("Shutting Down...")
-        .setColor("0xff0000")
-      //.setDescription("Shutting Down...");
+    // case "shutdown":
+    //   const embedShutdown = new RichEmbed()
+    //     .setTitle("Shutting Down...")
+    //     .setColor("0xff0000")
+    //   //.setDescription("Shutting Down...");
 
-      message.channel.send(embedShutdown).then(() => bot.destroy());
-      break;
+    //   message.channel.send(embedShutdown).then(() => bot.destroy());
+    //   break;
     /*
   case "info":
     if(args[1] === "version")
@@ -112,5 +113,8 @@ bot.on("message",receivedMessage =>
   receivedMessage.reply("OwO");
 });
 */
+let resetID = {
+  ownerID = ownerID
+}
 
 bot.login(config.token);
