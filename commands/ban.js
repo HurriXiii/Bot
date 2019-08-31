@@ -105,11 +105,11 @@ module.exports = {
         if(bUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("That person can't be kicked!");
 
         let banEmbed = new RichEmbed()
-            .setDescription("~Ban~")
-            .setColor("#bc0000")
+            .setTitle("Ban")
+            .setColor("FF1B1B")
             .addField("Banned User",`:hammer: ${bUser} with ID ${bUser.id}`)
             .addField("Banned By",`:pencil2: <@${message.author.id}> with ID ${message.author.id}`)
-            .addField("Banned In",`:tv: ${message.channel}`)
+            .addField("Banned In",`:tv: ${message.channel} with ID ${channel.id}`)
             .addField("Time",`:clock4: ${message.createdAt}`)
             .addField("Reason",`:question: ${bReason}`);
 

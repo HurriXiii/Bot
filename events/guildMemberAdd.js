@@ -7,7 +7,8 @@ module.exports = (bot,member) =>
 {
     const embedJoin = new RichEmbed()
         .setTitle("**User Joined**  :sparkling_heart:")
-        .setDescription("**" + member.user.username + "**")
+        // .setDescription("**" + member.user.username + "**")
+        .setDescription(`<@${member.user.id}>`)
         .setColor("FF8CE8")
     member.guild.channels.get(config.join_and_leave_id).send(embedJoin)
 

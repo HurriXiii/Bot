@@ -41,24 +41,22 @@
 //     },
 // };
 
+// const Discord = require("discord.js");
 
-const bot = require("../bot-run.js");
-const { RichEmbed } = require("discord.js");
+// module.exports = {
+//     name: 'botinfo',
+//     description: 'Check out the todo list.',
+//     guildOnly: true,
+//     execute(message)
+//     {
+//         // let bicon = bot.user.displayAvatarURL;
+//         let botembed = new Discord.RichEmbed()
+//             .setDescription("Bot Information")
+//             .setColor("#15f153")
+//             // .setThumbnail(bicon)
+//             .addField(`Bot name: ${bot.user.username}`)
+//             .addField("Created On",bot.createdAt);
 
-module.exports = {
-    name: 'botinfo',
-    description: 'Check out the todo list.',
-    guildOnly: true,
-    execute(message)
-    {
-        // let bicon = bot.user.displayAvatarURL;
-        let botembed = new RichEmbed()
-            .setDescription("Bot Information")
-            .setColor("#15f153")
-            // .setThumbnail(bicon)
-            .addField("Bot Name",bot.username)
-            .addField("Created On",bot.createdAt);
-
-        message.channel.send(botembed);
-    },
-};
+//         message.channel.send(botembed);
+//     },
+// };
